@@ -37,6 +37,8 @@ def my_lookup_type(val):
         field_names = [field.name for field in fields]
         if "_vptr" in field_names:
             real_type = get_dynamic_type(val)
+            if real_type is None:
+                return None
             cast_string = "*({type}*)({address:#x})".format(
                 type=real_type, address=int(val['_data']))
             real_val = gdb.parse_and_eval(cast_string)
