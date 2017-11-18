@@ -1,4 +1,4 @@
-module foo
+module foo_module
   implicit none
 
   type my_base_type
@@ -22,10 +22,10 @@ contains
        print*, "my_extended_type ", arg%base_char, " ", arg%extended_char
     end select
   end subroutine bar
-end module foo
+end module foo_module
 
 program mvce
-  use foo
+  use foo_module
   implicit none
 
   type(my_base_type) :: base1
