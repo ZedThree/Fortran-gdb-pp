@@ -90,3 +90,13 @@ the `type` argument must be a `gdb.Type` object. No matter, we can use
 the `gdb.lookup_type(name)` function... except that this doesn't work
 with Fortran types. So again, we need to fall back to using
 `gdb.execute`.
+
+Known issues
+------------
+
+- printing allocatable variables before they've been allocated will
+  crash gdb
+- accessing components of dynamic types is still annoying, as you
+  still need to go through the intermediate `_data` component, which
+  gdb thinks is a pointer to a base type object
+
