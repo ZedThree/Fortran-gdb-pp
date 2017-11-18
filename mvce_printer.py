@@ -11,8 +11,8 @@ def get_dynamic_type(val):
     module_vtab = re.compile(r"__(?P<module>[a-z].*)"
                              r"_MOD___vtab_(?P=module)_"
                              r"(?P<type>[A-Z].*)")
-    program_vtab = re.compile(r"__vtab_[a-z0-9_]*_"
-                              r"(P<type>[A-Z].*)\.[0-9]*")
+    program_vtab = re.compile(r"__vtab_(?P<prog>[a-z0-9_]*)_"
+                              r"(?P<type>[A-Z].*)\.[0-9]*")
 
     if vptr_symbol.startswith("__vtab_"):
         print("type defined in a program")
