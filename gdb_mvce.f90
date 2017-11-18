@@ -24,7 +24,7 @@ contains
   end subroutine bar
 end module foo_module
 
-program mvce
+program MVCE_PROGRAM
   use foo_module
   implicit none
 
@@ -38,4 +38,4 @@ program mvce
 
   call bar(alloc_base1)
   call bar(alloc_ext1)
-end program mvce
+end program MVCE_PROGRAM
