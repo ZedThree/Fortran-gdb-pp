@@ -28,13 +28,20 @@ program MVCE_PROGRAM
   use foo_module
   implicit none
 
+  type, extends(my_base_type) :: prog_type
+     character(len=4) :: extended_char = "prog"
+  end type prog_type
+
   type(my_base_type) :: base1
   type(my_extended_type) :: ext1
+  type(prog_type) :: prog
   class(my_base_type), allocatable :: alloc_base1
   class(my_base_type), allocatable :: alloc_ext1
+  class(my_base_type), allocatable :: alloc_prog
 
   allocate(alloc_base1, source=base1)
   allocate(alloc_ext1, source=ext1)
+  allocate(alloc_prog, source=prog)
 
   call bar(alloc_base1)
   call bar(alloc_ext1)
