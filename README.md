@@ -88,8 +88,20 @@ Lastly, we need to actually print the `_data` component as the dynamic
 type. While the python API does provide a `Value.cast(type)` method,
 the `type` argument must be a `gdb.Type` object. No matter, we can use
 the `gdb.lookup_type(name)` function... except that this doesn't work
-with Fortran types. So again, we need to fall back to using
-`gdb.execute`.
+with Fortran types. This time, we fallback to using
+`gdb.parse_and_eval`:
+
+```
+cast_string = "*({type}*)({address:#x})".format(
+    type=real_type, address=int(val['_data']))
+real_val = gdb.parse_and_eval(cast_string)
+```
+
+where `real_type` is a string containing the dynamic type. This
+basically executes `*(<dynamic type>)(value%_data)` and then we can
+pass the resulting value to a pretty printer that just returns
+`str(val)`, i.e. like the default printer.
+
 
 Known issues
 ------------
